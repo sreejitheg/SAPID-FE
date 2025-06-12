@@ -15,7 +15,7 @@ interface SidebarProps {
   onConversationSelect: (id: string) => void;
   onConversationDelete: (id: string) => void;
   onDocumentUpload: (file: File, type: 'permanent' | 'temporary') => Promise<void>;
-  onDocumentDelete: (id: string) => void;
+  onDocumentDelete: (id: string) => Promise<void>;
   onSettingsChange: (settings: any) => void;
   isUploading: boolean;
   activeConversationId?: string;
