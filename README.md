@@ -26,12 +26,91 @@ cp .env.example .env.local
 npm run dev
 ```
 
-## Environment Variables
+## Docker Deployment
+
+### Quick Start with Docker Compose
+
+1. **Clone and setup environment:**
+```bash
+git clone <your-repo>
+cd sapid-ai-app
+cp .env.example .env.local
+# Edit .env.local and add your DIFY_API_KEY
+```
+
+2. **Run with Docker Compose:**
+```bash
+# Development
+docker-compose up --build
+
+# Production with nginx proxy
+docker-compose --profile production up --build
+```
+
+### Manual Docker Build
+
+```bash
+# Build the image
+docker build -t sapid-app .
+
+# Run the container
+docker run -p 3000:3000 \
+  -e DIFY_API_KEY=your_dify_api_key_here \
+  --name sapid-container \
+  sapid-app
+```
+
+### Production Deployment
+
+For production deployment with SSL and nginx:
+
+1. **Configure SSL certificates:**
+```bash
+mkdir ssl
+# Add your SSL certificates to the ssl/ directory
+# cert.pem and key.pem
+```
+
+2. **Update nginx.conf:**
+   - Uncomment HTTPS server block
+   - Update server_name with your domain
+   - Configure SSL certificate paths
+
+3. **Deploy:**
+```bash
+docker-compose --profile production up -d
+```
+
+### Environment Variables
 
 Create a `.env.local` file with:
 
 ```env
 DIFY_API_KEY=your_dify_api_key_here
+NODE_ENV=production
+```
+
+### Health Checks
+
+The application includes health check endpoints:
+
+- **Application health**: `GET /api/health`
+- **Container health**: Built-in Docker healthcheck
+- **Load balancer health**: `GET /health` (nginx)
+
+### Monitoring
+
+Monitor your deployment:
+
+```bash
+# View logs
+docker-compose logs -f sapid-app
+
+# Check container status
+docker-compose ps
+
+# Monitor resource usage
+docker stats
 ```
 
 ## Backend Integration
@@ -74,6 +153,12 @@ src/
 api/
 ├── chat/               # Chat proxy endpoint
 └── health/             # Health check endpoint
+
+docker/
+├── Dockerfile          # Multi-stage Docker build
+├── docker-compose.yml  # Container orchestration
+├── nginx.conf          # Reverse proxy configuration
+└── .dockerignore       # Docker ignore patterns
 ```
 
 ## Security
@@ -82,12 +167,42 @@ api/
 - **BFF pattern**: Client never directly communicates with Dify
 - **Environment variables**: Sensitive data in `.env.local` (not committed)
 - **CORS protection**: Proper headers and validation
+- **Rate limiting**: nginx-based API rate limiting
+- **Security headers**: XSS, CSRF, and content-type protection
+
+## Performance
+
+- **Multi-stage Docker build**: Optimized image size
+- **Standalone Next.js output**: Minimal runtime dependencies
+- **Gzip compression**: nginx-based compression
+- **Image optimization**: WebP and AVIF support
+- **SSE streaming**: Efficient real-time communication
 
 ## Deployment
 
-1. Set `DIFY_API_KEY` in your deployment environment
-2. Build and deploy as a standard Next.js application
-3. Ensure your Dify API key has appropriate permissions
+### Development
+```bash
+docker-compose up --build
+```
+
+### Production
+```bash
+# With nginx reverse proxy
+docker-compose --profile production up -d
+
+# Or deploy to cloud platforms:
+# - Vercel (recommended for Next.js)
+# - AWS ECS/Fargate
+# - Google Cloud Run
+# - Azure Container Instances
+```
+
+### Cloud Deployment
+
+1. **Set `DIFY_API_KEY` in your deployment environment**
+2. **Build and push to container registry**
+3. **Deploy using your preferred cloud platform**
+4. **Ensure your Dify API key has appropriate permissions**
 
 ## Migration from Direct Dify Integration
 
