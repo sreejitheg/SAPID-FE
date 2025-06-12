@@ -14,7 +14,7 @@ interface SidebarProps {
   settings: AppSettings;
   onConversationSelect: (id: string) => void;
   onConversationDelete: (id: string) => void;
-  onDocumentDelete: (docId: string) => void | Promise<void>;
+  onDocumentDelete: (docId: string) => void;
   onDocumentDelete: (id: string) => void;
   onSettingsChange: (settings: any) => void;
   isUploading: boolean;
