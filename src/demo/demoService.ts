@@ -1,6 +1,6 @@
 import { Document, Message, Conversation, DynamicForm } from '../types';
 import { demoConversations, demoDocuments, demoMessages, demoPurchaseForm } from './demoData';
-import { apiService } from '../api/apiService';
+import { difyService } from '../api/difyService';
 
 class DemoService {
   private conversations: Conversation[] = [...demoConversations];
@@ -146,5 +146,5 @@ export const demoService = new DemoService();
 
 // Create a unified service that switches between demo and real API
 export const createUnifiedService = (demoMode: boolean) => {
-  return demoMode ? demoService : apiService;
+  return demoMode ? demoService : difyService;
 };
