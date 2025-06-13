@@ -1,3 +1,4 @@
+'use client';
 import React, { useState, useEffect } from 'react';
 import { Header } from './components/Layout/Header';
 import { Sidebar } from './components/Layout/Sidebar';
@@ -15,7 +16,7 @@ function App() {
   const [activeTab, setActiveTab] = useState<SidebarTab>('conversations');
   const [isStreaming, setIsStreaming] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState((typeof window !== "undefined" ? window.innerWidth < 768 : false));
   
   const [settings, setSettings] = useLocalStorage<AppSettings>('sapid-settings', {
     webSearchEnabled: true,
