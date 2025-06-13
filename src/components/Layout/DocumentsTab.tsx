@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { FileText, Upload, Trash2, AlertTriangle, ExternalLink, Shield } from 'lucide-react';
 import { Document } from '../../types';

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import { Bot, User, ExternalLink, Copy, Edit2, Check, X } from 'lucide-react';
 import { Message } from '../../types';
