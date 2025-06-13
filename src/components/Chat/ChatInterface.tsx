@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Paperclip, Loader2 } from 'lucide-react';
 import { Message } from '../../types';
