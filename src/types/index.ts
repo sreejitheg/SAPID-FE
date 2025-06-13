@@ -31,6 +31,7 @@ export interface Conversation {
   title: string;
   createdAt: Date;
   lastMessage?: string;
+  messageCount?: number;
 }
 
 export interface Session {

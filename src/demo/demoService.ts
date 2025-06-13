@@ -27,7 +27,6 @@ class DemoService {
       id: 'conv-' + Date.now(),
       title,
       createdAt: new Date(),
- //     messageCount: 0,
       lastMessage: '',
     };
     this.conversations.unshift(newConv);
