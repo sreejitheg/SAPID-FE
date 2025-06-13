@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
 import { Monitor, Moon, Sun, Globe, TestTube, Activity, WifiOff, RefreshCw, Shield, User } from 'lucide-react';
 import { AppSettings } from '../../types';
