@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from 'react';
 import { Send, Loader2 } from 'lucide-react';
 import { DynamicForm as FormType } from '../../types';

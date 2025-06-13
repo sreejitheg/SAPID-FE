@@ -1,5 +1,3 @@
-"use client";
-
 import React from 'react';
 import { Plus, MessageSquare, Trash2, Clock } from 'lucide-react';
 import { Conversation } from '../../types';
